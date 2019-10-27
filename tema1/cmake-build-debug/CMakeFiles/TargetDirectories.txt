@@ -1,0 +1,5 @@
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/cmake-build-debug/CMakeFiles/test_srv.dir
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/cmake-build-debug/CMakeFiles/fileserver.dir
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/cmake-build-debug/CMakeFiles/fileclient.dir

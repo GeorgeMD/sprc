@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/srv.dir/server/server.cpp.o  -o srv 

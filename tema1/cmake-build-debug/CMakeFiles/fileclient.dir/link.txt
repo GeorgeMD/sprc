@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/fileclient.dir/client.cpp.o CMakeFiles/fileclient.dir/load_clnt.c.o  -o fileclient 

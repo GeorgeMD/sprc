@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/test_srv.dir/lab2/rpc_server.c.o CMakeFiles/test_srv.dir/lab2/load_clnt.c.o CMakeFiles/test_srv.dir/lab2/load_svc.c.o CMakeFiles/test_srv.dir/lab2/load_xdr.c.o  -o test_srv 

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/load.h
+rpc/rpc.h
+-
+
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/load_clnt.c
+memory.h
+-
+load.h
+/mnt/c/Users/GeorgeMD/Documents/Facultate/sprc/tema1/load.h
+

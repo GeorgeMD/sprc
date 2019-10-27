@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/fileserver.dir/server.cpp.o CMakeFiles/fileserver.dir/load_svc.c.o  -o fileserver 
