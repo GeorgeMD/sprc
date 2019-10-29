@@ -25,7 +25,7 @@ static char const * last_request = nullptr;
 
 bool init_server();
 bool appendFile(char * cPtrWord);
-response get_response(char const * respStr, int hits = -1);
+response get_response(char const * respStr = "", int hits = -1);
 bool isNumber(char *str, size_t *outNumber);
 
 char ** start_request_1_svc(request *r, struct svc_req *cl)
@@ -54,7 +54,7 @@ char ** start_request_1_svc(request *r, struct svc_req *cl)
 }
 
 response * send_argument_1_svc(request *r, struct svc_req *cl) {
-    static response res{nullptr, -1};
+    static response res = get_response();
 
     if (!isServerInit) {
         if (!init_server()) {
@@ -72,7 +72,11 @@ response * send_argument_1_svc(request *r, struct svc_req *cl) {
                         res.hits++;
                 }
             } else {
-                res = get_response(r->req, word_hits_map[r->req]);
+                int hits = 0;
+                if (word_hits_map.find(r->req) != word_hits_map.end())
+                    hits = word_hits_map[r->req];
+
+                res = get_response(r->req, hits);
             }
         } else if (strcmp(last_request, APPEND_REQUEST) == 0) {
             if (appendFile(r->req))
@@ -87,13 +91,12 @@ response * send_argument_1_svc(request *r, struct svc_req *cl) {
 
 bool isNumber(char *str, size_t *outNumber) {
     *outNumber = strtoul(str, nullptr, 10);
-    return *outNumber != 0ULL;
+    return std::to_string(*outNumber) == std::string(str);
 }
 
 bool init_server() {
     isServerInit = true;
 
-    char buffer[BUFSIZ];
     std::ifstream f(FILENAME);
     std::string word;
 
@@ -102,7 +105,6 @@ bool init_server() {
             word_hits_map[word] = 0;
 
         ++word_hits_map[word];
-
     }
 
     f.close();
@@ -123,7 +125,12 @@ bool appendFile(char * cPtrWord) {
         return false;
 
     std::ofstream f(FILENAME, std::ios::app);
-    f << cPtrWord << std::endl;
+    if (!f)
+        return false;
+
+    if (f.tellp() != 0)
+        f << "\n";
+    f << cPtrWord;
 
     std::string word(cPtrWord);
 

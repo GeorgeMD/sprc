@@ -1,6 +1,5 @@
 #include "load.h"
 
-#include <string>
 #include <rpc/rpc.h>
 #include <iostream>
 
