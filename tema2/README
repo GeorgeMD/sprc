@@ -1,0 +1,56 @@
+Diaconu George-Marius 342 C3
+Airplane service - Tema 2 SPRC
+===============================================================================
+
+Pentru a porni containerele executati:
+docker-compose -f application.yaml up -d
+
+Pentru a oprit toate containerele:
+docker-compose -f application.yaml down
+
+Pentru a folosi aplicatia de admin:
+docker attach tema2_admin
+
+Pentru a folosi clientul:
+docker attach tema2_client
+
+Pentru a iesi din admin sau client fara a inchide aplicatiile:
+Ctrl+p Ctrl+q
+(sau comanda de docker detach pe care o aveti configurata)
+
+
+Solutia mea are urmatoarele imagini:
+- tema2_database -> baza de date mysql ce poate fi accesata pe portul 3306
+
+- tema2_airplane_service -> aplicatie flask ce ofera 3 rute:
+    - getOptimalRoute de tip GET ce primeste parametrii URL in ordine:
+        - orasul de plecare
+        - orasul destinatie
+        - numarul maxim de zboruri pentru a ajunge la destinatie
+        - ziua plecarii
+    - bookTicket de tip POST:
+        - parametrul JSON 'flightIds' ce este o lista cu id-urile 
+          asociate cu rezercarea
+        - intoarce id-ul rezervarii sau un mesaj de eroare sugestiv
+    - buyTicket de tip POST:
+        - parametrul JSON 'reservationId' ce reprezinta id-ul
+          rezervarii cumparate
+        - intoarce detaliile zborurilor sau un mesaj de eroare sugestiv
+
+- tema2_client -> aplicatie CLI cu urmatoarele comenzi:
+    - GetRoute departure_city destination_city max_flights departure_day
+        ex: GetRoute londra bucuresti 10 100
+    - BookTicket flight_ids
+        ex: BookTicket 1 2 3 4 5
+    - BuyTicket reservation_id credit_card_info
+        ex: BuyTicket 1 "Ionel Vasile 1234567890 03/24 123"
+        nu conteaza ce vine dupa reservation_id pentru ca oricum informatiile
+        despre card nu sunt folosite
+
+- tema2_admin -> aplicatie CLI cu urmatoarele comenzi:
+    - AddFlight departure_city destination_city departure_day departure_hour
+      duration number_of_seats flight_id
+    - RemoveFlight flight_id
+
+Daca folositi orice alta comanda in client sau admin sunt afisate
+comenzile valabile.

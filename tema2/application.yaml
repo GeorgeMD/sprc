@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+  airplane_service:
+    build: ./AirplaneService
+    links:
+      - database
+    networks:
+      - database_network
+      - client_network
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: AirplaneService
+    container_name: tema2_airplane_service
+  
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/:ro
+      - db_data:/var/lib/mysql
+    networks:
+      - database_network
+    container_name: tema2_database
+  
+  admin:
+    build: ./Admin
+    links:
+      - database
+    networks:
+      - database_network
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: AirplaneService
+    stdin_open: true
+    tty: true
+    container_name: tema2_admin
+  
+  client:
+    build: ./Client
+    links:
+      - airplane_service
+    networks:
+      - client_network
+    environment:
+      SERVICE_URL: http://airplane_service:8080/
+    stdin_open: true
+    tty: true
+    container_name: tema2_client
+
+volumes:
+  db_data: {}
+
+networks:
+  database_network:
+    driver: bridge
+  client_network:
+    driver: bridge

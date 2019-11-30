@@ -1,0 +1,22 @@
+Diaconu George-Marius 342 C3
+SPRC Tema 1
+================================================================================
+
+In implementarea mea folosesc 2 functii RPC. O functie care pregateste
+requestul (START_REQUEST) in care clientul specifica SEARCH sau APPEND, iar
+server-ul raspunde cu YES SEARCH, YES APPEND sau NO. A doua functie este pentru
+trimiterea argumentului (SEND_ARGUMENT) prin care se trimite un string ce poate
+reprezenta un numar sau un cuvant ce trebuie cautat sau adaugat in fisier.
+
+Initializarea server-ului se face la primul apel al uneia dintre functiile RPC
+si se face o singura data.
+
+Am retinut cuvintele si numarul de aparitii intr-un unordered_map in care cheile
+sunt cuvintele, iar valorile sunt numarul de aparitii al cuvantului cheie.
+
+La APPEND este scris in fisier noul cuvant si este improspatat map-ul de
+cuvinte, fie prin incrementarea valorii in cazul unui cuvant ce exista deja,
+fie prin adaugarea unei noi intrari in map.
+
+Pentru a delimita cuvintele din fisier am folosit "\n". Acesta este singurul
+delimitator suportat.
