@@ -15,12 +15,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="477d2496-230e-4fc0-b176-06c9c16c1c90" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server" beforeDir="false" afterPath="$PROJECT_DIR$/server" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_clnt.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_clnt.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_svc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_svc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_xdr.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_xdr.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/server.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.o" beforeDir="false" afterPath="$PROJECT_DIR$/server.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.o" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
