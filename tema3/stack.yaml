@@ -1,0 +1,69 @@
+version: '3.3'
+
+services:
+  adapter:
+    image: localhost:5000/adapter
+    hostname: adapter
+    networks:
+      - broker_network
+      - database_network
+    environment:
+      DEBUG_DATA_FLOW:
+
+  broker:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+    hostname: broker
+    networks:
+      - broker_network
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+  
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 80:3000
+    hostname: grafana
+    networks:
+      - grafana_network
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: doi
+      GF_DATABASE_USER: security
+      GF_DATABASE_PASSWORD: unu
+  
+  fake_sensors:
+    image: localhost:5000/fake_sensors
+    hostname: fake_sensors
+    networks:
+      - broker_network
+  
+  database:
+    image: influxdb
+    ports:
+      - 8086:8086
+    hostname: database
+    networks:
+      - database_network
+      - grafana_network
+    volumes:
+      - db_data:/var/lib/influxdb
+    environment:
+      INFLUXDB_DB: iot_db
+      INFLUXDB_USER: security
+      INFLUXDB_USER_PASSWORD: unu
+
+volumes:
+  db_data: {}
+  grafana_data: {}
+
+networks:
+  broker_network:
+    driver: overlay
+  database_network:
+    driver: overlay
+  grafana_network:
+    driver: overlay
