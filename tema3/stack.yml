@@ -8,7 +8,7 @@ services:
       - broker_network
       - database_network
     environment:
-      DEBUG_DATA_FLOW:
+      - DEBUG_DATA_FLOW=true
 
   broker:
     image: eclipse-mosquitto
@@ -17,8 +17,6 @@ services:
     hostname: broker
     networks:
       - broker_network
-    volumes:
-      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
   
   grafana:
     image: grafana/grafana
@@ -28,23 +26,13 @@ services:
     networks:
       - grafana_network
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ${SPRC_DVP}/grafana:/var/lib/grafana
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: doi
-      GF_DATABASE_USER: security
-      GF_DATABASE_PASSWORD: unu
-  
-  fake_sensors:
-    image: localhost:5000/fake_sensors
-    hostname: fake_sensors
-    networks:
-      - broker_network
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=doi
   
   database:
     image: influxdb
-    ports:
-      - 8086:8086
     hostname: database
     networks:
       - database_network
@@ -52,13 +40,12 @@ services:
     volumes:
       - db_data:/var/lib/influxdb
     environment:
-      INFLUXDB_DB: iot_db
-      INFLUXDB_USER: security
-      INFLUXDB_USER_PASSWORD: unu
+      - INFLUXDB_DB=iot_db
+      - INFLUXDB_USER=security
+      - INFLUXDB_USER_PASSWORD=unu
 
 volumes:
   db_data: {}
-  grafana_data: {}
 
 networks:
   broker_network:

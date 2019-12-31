@@ -1,8 +1,12 @@
 #!/bin/bash
 
-docker stack rm iot_platform
-echo "waiting 30 seconds..."
-sleep 30
-docker image rm localhost:5000/adapter adapter
-docker volume rm iot_platform_db_data
-docker image rm localhost:5000/fake_sensors
+SECONDS=20
+if [ $# -gt 0 ] ; then
+    SECONDS=$1
+fi
+
+docker stack rm sprc3
+echo "waiting "$SECONDS" seconds..."
+sleep $SECONDS
+docker image rm adapter localhost:5000/adapter
+docker volume rm sprc3_db_data
